@@ -1,0 +1,432 @@
+
+====================================================================================================
+1. GRUNDINVENTUR
+====================================================================================================
+Datei: 2025-01-01.parquet  |  Größe: 41.9 MB  |  Zeilen: 3,581,875
+time_schedule Spanne: 2025-01-01 01:00:00+01:00  bis  2025-01-02 14:26:00+01:00
+Hinweis: 1.1.2025 ist ein Mittwoch UND gesetzlicher Feiertag (Neujahr) -> Betrieb wie an einem
+Sonn-/Feiertag, nicht wie an einem normalen Werktag. Die Spanne reicht bis in den 2.1. morgens
+hinein, weil Trips, die am 1.1. spät nachts beginnen, nach Mitternacht weiterlaufen (kein Fehler).
+                     column                     type  null_share  distinct           min        median          max
+       platform_id_schedule                   BIGINT      0.0000   15725.0 -9.222221e+18 -4.073959e+16 9.222936e+18
+              stop_sequence                USMALLINT      0.0000      62.0  1.000000e+00  1.000000e+01 6.200000e+01
+              time_schedule TIMESTAMP WITH TIME ZONE      0.0000    1960.0           NaN           NaN          NaN
+          distance_traveled                  INTEGER      0.0000   37580.0  0.000000e+00  4.269800e+04 1.968286e+06
+                    trip_id                   BIGINT      0.0000   37215.0 -9.221114e+18  2.940309e+16 9.221616e+18
+              trip_headsign                   BIGINT      0.0000    1446.0  1.163190e+05  8.002156e+06 8.800586e+06
+           update_timestamp TIMESTAMP WITH TIME ZONE      0.0145 1864923.0           NaN           NaN          NaN
+           platform_id_real                   BIGINT      0.0000   16862.0 -9.222221e+18 -6.960789e+15 9.222936e+18
+                  time_real TIMESTAMP WITH TIME ZONE      0.0000    2119.0           NaN           NaN          NaN
+               is_cancelled                  BOOLEAN      0.0000       2.0           NaN           NaN          NaN
+              message_codes               SMALLINT[]      0.6905       NaN           NaN           NaN          NaN
+            is_betriebshalt                  BOOLEAN      0.0000       2.0           NaN           NaN          NaN
+       pickup_drop_off_type                  VARCHAR      0.0000       2.0           NaN           NaN          NaN
+                        lat                   DOUBLE      0.0000    8420.0  4.137891e+01  5.080952e+01 5.933001e+01
+                        lon                   DOUBLE      0.0000    8417.0  1.453939e+00  9.817779e+00 2.607441e+01
+                    stop_id                   BIGINT      0.0000    8428.0  1.003930e+05  8.004132e+06 8.842051e+06
+                   operator                  VARCHAR      0.0000     293.0           NaN           NaN          NaN
+                   category                  VARCHAR      0.0000      75.0           NaN           NaN          NaN
+                     number                  VARCHAR      0.0000   32653.0           NaN           NaN          NaN
+                       line                  VARCHAR      0.0000    2558.0           NaN           NaN          NaN
+                is_regional                  BOOLEAN      0.0000       2.0           NaN           NaN          NaN
+                   is_final                  BOOLEAN      0.0000       2.0           NaN           NaN          NaN
+        dwell_time_schedule                  INTEGER      0.0575      63.0  0.000000e+00  6.000000e+01 8.700000e+03
+            dwell_time_real                  INTEGER      0.0776     182.0 -3.600000e+03  6.000000e+01 8.736000e+04
+                 is_arrival                  BOOLEAN      0.0000       2.0           NaN           NaN          NaN
+initial_scheduled_departure TIMESTAMP WITH TIME ZONE      0.0019    1439.0           NaN           NaN          NaN
+            initial_stop_id                   BIGINT      0.0019    1414.0  1.163190e+05  8.002078e+06 8.800586e+06
+                      delay                  INTEGER      0.0000     247.0 -8.718000e+04  6.000000e+01 2.286000e+04
+
+Spalten mit >95% NULL (praktisch unbrauchbar für dieses File):
+  keine
+
+====================================================================================================
+2. KORNGRÖSSE: Was ist eine Zeile?
+====================================================================================================
+Zeilen gesamt: 3,581,875
+Distinkte (trip_id, stop_id, is_arrival)-Kombinationen: 994,680
+=> (trip_id, stop_id, is_arrival) ist NICHT der Primärschlüssel. Es gibt pro Halt-Ereignis
+   (ein Trip hält an einem Stop, einmal als Ankunft, einmal als Abfahrt) im Schnitt
+   3.60 Zeilen -- das sind aufeinanderfolgende Prognose-Updates.
+
+Verteilung Meldungen pro Halt-Ereignis (Ausschnitt):
+ n  num_groups    share
+ 1      254700 0.256062
+ 2      222579 0.223769
+ 3      171219 0.172135
+ 4      107831 0.108408
+ 5       68624 0.068991
+ 6       45179 0.045421
+ 7       31100 0.031266
+ 8       22220 0.022339
+ 9       16329 0.016416
+10       12301 0.012367
+11        9004 0.009052
+12        6852 0.006889
+13        5347 0.005376
+14        4068 0.004090
+15        3208 0.003225
+... Median Meldungen/Halt: 3.0
+Anteil Halt-Ereignisse mit nur EINER Meldung (keine Prognose-Historie beobachtbar): 25.6%
+
+Gruppen mit >1 is_final=True Zeile: 8  (von 994,680)
+Gruppen mit 0 is_final=True Zeilen: 0
+is_final=True Zeilen, die NICHT die chronologisch letzte update_timestamp-Zeile ihrer Gruppe sind: 8
+=> is_final markiert (fast immer, 99.999%) exakt die letzte im File beobachtete Prognose-Meldung
+   für dieses Halt-Ereignis. update_timestamp ist der Zeitpunkt, zu dem die Vorhersage-Pipeline
+   diesen Datensatz abgefragt/geschrieben hat. Damit LÄSST SICH der zeitliche Verlauf der
+   DB-Verspätungsprognose je Halt rekonstruieren, indem man pro (trip_id, stop_id, is_arrival)
+   nach update_timestamp sortiert.
+
+Konkretes Beispiel: trip_id=3594072884769398631, stop_id=8004162, is_arrival=True (10 Meldungen), chronologisch:
+                update_timestamp             time_schedule                 time_real  delay  is_final  is_cancelled
+2025-01-01 04:17:33.864268+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 19:33:33.794136+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 19:43:33.841753+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 19:45:33.920339+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 20:03:33.760176+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 20:27:34.328746+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 20:31:34.167771+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 20:33:34.651049+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 20:37:33.891443+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0     False         False
+2025-01-01 21:03:34.414263+01:00 2025-01-01 20:35:00+01:00 2025-01-01 20:35:00+01:00      0      True         False
+Anmerkung: is_cancelled flackert hier innerhalb desselben delay-Wertes zwischen True/False --
+das ist NICHT durch die Daten erklärbar (könnte eine temporär gesetzte/zurückgezogene IRIS-Meldung
+sein) und sollte als offene Unsicherheit behandelt werden, nicht als eindeutiges 'Zug fiel aus'.
+
+====================================================================================================
+3. MÜNCHNER S-BAHN IDENTIFIZIEREN
+====================================================================================================
+Werte in category (Top 15):
+category       c
+       S 1635875
+      RB  560468
+      RE  513848
+     ICE  151936
+     HLB   56309
+     NWB   49420
+      IC   49374
+     VIA   42408
+     BRB   41522
+     MEX   40624
+     Bus   34176
+      ag   29353
+     RSM   26408
+     SWE   23700
+     RRB   22429
+'S' kommt vor: True (1,635,875 Zeilen bundesweit)
+
+149 distinkte S-Bahn stop_id im Münchner Suchraum (lat 47.9-48.5, lon 11.0-12.1).
+
+Ranking der Münchner S-Bahn-Halte nach Zeilenanzahl (Rang 10-15, zeigt den Bruch nach Rang 12):
+ stop_id       lat       lon  n_rows  n_trips
+ 8004136 48.129168 11.593049   13862      933
+ 8000262 48.127440 11.604971   13794      937
+ 8004158 48.149852 11.461872    8279      608
+ 8004134 48.134250 11.615986    8216      661
+ 8004142 48.134001 11.633295    5670      333
+ 8004163 48.149026 11.443940    3728      232
+ 8004138 48.118543 11.595785    3406      230
+
+Referenz-Trip A (trip_id=4120542989953546871) deckt 12/12 Kern-Halte ab, in dieser Reihenfolge: [8004158, 8004151, 8004179, 8004128, 8004129, 8098263, 8004132, 8004135, 8004131, 8004136, 8000262, 8004134]
+Datengetriebene West->Ost-Reihenfolge der 12 Kern-Halte: [8004158, 8004151, 8004179, 8004128, 8004129, 8098263, 8004132, 8004135, 8004131, 8004136, 8000262, 8004134]
+
+Zuordnung Stammstrecken-Stationen (Trip-Reihenfolge als Primärkriterium, Koordinaten zur Bestätigung):
+ stop_id                         name       lat       lon  n_rows  n_trips  dist_m                                                                                                                                    confidence
+ 8004158               München-Pasing 48.149852 11.461872  8279.0    608.0    39.4                                                              hoch: 39 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004151                 München-Laim 48.144371 11.503669 14062.0    933.0    26.2                                                              hoch: 26 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004179         München Hirschgarten 48.143540 11.519245 14044.0    933.0    91.3                                                              hoch: 91 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004128  München Donnersbergerbrücke 48.142623 11.536537 15250.0   1047.0   115.3                                                             hoch: 115 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004129         München Hackerbrücke 48.141969 11.548572 14088.0    933.0     4.0                                                               hoch: 4 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8098263  München Hauptbahnhof (tief) 48.141172 11.560493 14230.0    933.0   221.0                                  mittel: 221 m von Wikipedia-Koordinate (grösserer Versatz, aber Position in Trip-Reihenfolge stimmt überein)
+ 8004132 München Karlsplatz (Stachus) 48.139452 11.565619 14322.0    933.0    35.4                                                              hoch: 35 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004135          München Marienplatz 48.137048 11.575386 14136.0    933.0    20.9                                                              hoch: 21 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004131              München Isartor 48.134202 11.583234 14018.0    933.0   151.6                                  mittel: 152 m von Wikipedia-Koordinate (grösserer Versatz, aber Position in Trip-Reihenfolge stimmt überein)
+ 8004136    München Rosenheimer Platz 48.129168 11.593049 13862.0    933.0     NaN mittel: Position via reale Trip-Reihenfolge bestätigt, aber KEIN externer Koordinatenbeleg gefunden (Name daher nicht unabhängig verifiziert)
+ 8000262                  München Ost 48.127440 11.604971 13794.0    937.0    58.2                                                              hoch: 58 m von Wikipedia-Koordinate, Position in Trip-Reihenfolge stimmt überein
+ 8004134     München Leuchtenbergring 48.134250 11.615986  8216.0    661.0     NaN mittel: Position via reale Trip-Reihenfolge bestätigt, aber KEIN externer Koordinatenbeleg gefunden (Name daher nicht unabhängig verifiziert)
+
+Bekannter Sonderfall: stop_id 8098261 (physisch selber Ort wie Hauptbahnhof tief, andere ID):
+line   c
+  S7 580
+
+Fehlende Stammstrecken-Stationen in den Daten: keine -- alle 12 vorhanden
+
+Linien (line) und Betreiber (operator) je Stammstrecken-Halt:
+ stop_id line operator    c                         name
+ 8000262   S1   800725 2603                  München Ost
+ 8000262   S6   800725 2070                  München Ost
+ 8000262   S4   800725 2029                  München Ost
+ 8000262   S3   800725 1900                  München Ost
+ 8000262   S2   800725 1740                  München Ost
+ 8000262   S8   800725 1737                  München Ost
+ 8000262   S5   800725 1674                  München Ost
+ 8000262   S8       08   34                  München Ost
+ 8000262    4   800725    7                  München Ost
+ 8004128   S1   800725 2666  München Donnersbergerbrücke
+ 8004128   S4   800725 2182  München Donnersbergerbrücke
+ 8004128   S6   800725 2102  München Donnersbergerbrücke
+ 8004128   S3   800725 1894  München Donnersbergerbrücke
+ 8004128   S2   800725 1842  München Donnersbergerbrücke
+ 8004128   S8   800725 1742  München Donnersbergerbrücke
+ 8004128   S5   800725 1630  München Donnersbergerbrücke
+ 8004128   S7   800725 1142  München Donnersbergerbrücke
+ 8004128   S8       08   34  München Donnersbergerbrücke
+ 8004128    4   800725   16  München Donnersbergerbrücke
+ 8004129   S1   800725 2702         München Hackerbrücke
+ 8004129   S4   800725 2108         München Hackerbrücke
+ 8004129   S6   800725 2090         München Hackerbrücke
+ 8004129   S3   800725 1874         München Hackerbrücke
+ 8004129   S2   800725 1862         München Hackerbrücke
+ 8004129   S8   800725 1712         München Hackerbrücke
+ 8004129   S5   800725 1688         München Hackerbrücke
+ 8004129   S8       08   38         München Hackerbrücke
+ 8004129    4   800725   14         München Hackerbrücke
+ 8004131   S1   800725 2686              München Isartor
+ 8004131   S4   800725 2128              München Isartor
+ 8004131   S6   800725 2032              München Isartor
+ 8004131   S3   800725 1926              München Isartor
+ 8004131   S2   800725 1874              München Isartor
+ 8004131   S5   800725 1672              München Isartor
+ 8004131   S8   800725 1652              München Isartor
+ 8004131   S8       08   28              München Isartor
+ 8004131    4   800725   20              München Isartor
+ 8004132   S1   800725 2710 München Karlsplatz (Stachus)
+ 8004132   S4   800725 2204 München Karlsplatz (Stachus)
+ 8004132   S6   800725 2090 München Karlsplatz (Stachus)
+ 8004132   S3   800725 1976 München Karlsplatz (Stachus)
+ 8004132   S2   800725 1876 München Karlsplatz (Stachus)
+ 8004132   S5   800725 1728 München Karlsplatz (Stachus)
+ 8004132   S8   800725 1688 München Karlsplatz (Stachus)
+ 8004132   S8       08   32 München Karlsplatz (Stachus)
+ 8004132    4   800725   18 München Karlsplatz (Stachus)
+ 8004134   S6   800725 2040     München Leuchtenbergring
+ 8004134   S4   800725 1856     München Leuchtenbergring
+ 8004134   S2   800725 1766     München Leuchtenbergring
+ 8004134   S8   800725 1582     München Leuchtenbergring
+ 8004134   S1   800725  941     München Leuchtenbergring
+ 8004134   S3   800725   30     München Leuchtenbergring
+ 8004134   S8       08    1     München Leuchtenbergring
+ 8004135   S1   800725 2700          München Marienplatz
+ 8004135   S4   800725 2136          München Marienplatz
+ 8004135   S6   800725 2070          München Marienplatz
+ 8004135   S3   800725 1968          München Marienplatz
+ 8004135   S2   800725 1842          München Marienplatz
+ 8004135   S8   800725 1696          München Marienplatz
+ 8004135   S5   800725 1670          München Marienplatz
+ 8004135   S8       08   34          München Marienplatz
+ 8004135    4   800725   20          München Marienplatz
+ 8004136   S1   800725 2638    München Rosenheimer Platz
+ 8004136   S4   800725 2100    München Rosenheimer Platz
+ 8004136   S6   800725 2036    München Rosenheimer Platz
+ 8004136   S3   800725 1910    München Rosenheimer Platz
+ 8004136   S2   800725 1828    München Rosenheimer Platz
+ 8004136   S5   800725 1654    München Rosenheimer Platz
+ 8004136   S8   800725 1646    München Rosenheimer Platz
+ 8004136   S8       08   28    München Rosenheimer Platz
+ 8004136    4   800725   22    München Rosenheimer Platz
+ 8004151   S1   800725 2706                 München-Laim
+ 8004151   S6   800725 2142                 München-Laim
+ 8004151   S4   800725 2070                 München-Laim
+ 8004151   S2   800725 1906                 München-Laim
+ 8004151   S3   800725 1854                 München-Laim
+ 8004151   S8   800725 1748                 München-Laim
+ 8004151   S5   800725 1584                 München-Laim
+ 8004151   S8       08   40                 München-Laim
+ 8004151    4   800725   12                 München-Laim
+ 8004158   S6   800725 2055               München-Pasing
+ 8004158   S4   800725 1983               München-Pasing
+ 8004158   S3   800725 1929               München-Pasing
+ 8004158   S8   800725 1616               München-Pasing
+ 8004158   S5   800725  662               München-Pasing
+ 8004158   S8       08   26               München-Pasing
+ 8004158    4   800725    8               München-Pasing
+ 8004179   S1   800725 2656         München Hirschgarten
+ 8004179   S6   800725 2158         München Hirschgarten
+ 8004179   S4   800725 2140         München Hirschgarten
+ 8004179   S3   800725 1916         München Hirschgarten
+ 8004179   S2   800725 1856         München Hirschgarten
+ 8004179   S8   800725 1696         München Hirschgarten
+ 8004179   S5   800725 1568         München Hirschgarten
+ 8004179   S8       08   40         München Hirschgarten
+ 8004179    4   800725   14         München Hirschgarten
+ 8098263   S1   800725 2672  München Hauptbahnhof (tief)
+ 8098263   S4   800725 2160  München Hauptbahnhof (tief)
+ 8098263   S6   800725 2096  München Hauptbahnhof (tief)
+ 8098263   S3   800725 1940  München Hauptbahnhof (tief)
+ 8098263   S2   800725 1878  München Hauptbahnhof (tief)
+ 8098263   S8   800725 1726  München Hauptbahnhof (tief)
+ 8098263   S5   800725 1706  München Hauptbahnhof (tief)
+ 8098263   S8       08   34  München Hauptbahnhof (tief)
+ 8098263    4   800725   18  München Hauptbahnhof (tief)
+
+Distinkte Linien über die ganze Stammstrecke: ['4', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8']
+Distinkte operator-Werte: ['08', '800725']
+
+-> output/muenchen_stationen.csv geschrieben (149 Zeilen).
+
+====================================================================================================
+4. DATENQUALITÄT (bundesweit, sowie Fokus Stammstrecke)
+====================================================================================================
+delay (Sekunden) bundesweit: min=-87180, median=60.0, max=22860, mean=176.3
+Zeilen mit delay > 3h oder < -10min (unplausibel bzw. Ausreißer): 595 (0.017%)
+([-60, 0, 60, 900, 2280, 4560],)
+
+is_cancelled=True: 73,028 von 3,581,875 Zeilen (2.04%)
+is_betriebshalt=True: 659 (0.02%)
+
+pickup_drop_off_type Verteilung:
+pickup_drop_off_type       c
+             REGULAR 3566024
+       NOT_AVAILABLE   15851
+NOT_AVAILABLE: 15,851 (0.44%) -- Kandidat zum Rausfiltern.
+
+Stündliche Zeilenanzahl (nach time_schedule-Stunde), gesamt:
+ h      c
+ 0  77896
+ 1  54763
+ 2  60668
+ 3  48774
+ 4  43751
+ 5  61618
+ 6  95234
+ 7 134197
+ 8 168619
+ 9 193651
+10 196657
+11 188094
+12 189360
+13 192343
+14 188709
+15 191112
+16 197130
+17 208268
+18 210494
+19 204502
+20 200033
+21 183974
+22 164783
+23 127245
+Stunden mit auffällig wenig Daten (<5% des Medians): keine (erwartbar: Nachtstunden mit wenig Zugverkehr am Feiertag sind niedrig, aber nicht leer)
+
+Stündliche Zeilenanzahl NUR Stammstrecke:
+ h     c
+ 0  2651
+ 1  1851
+ 2  3178
+ 3  2094
+ 4   446
+ 5  2664
+ 6  3674
+ 7  6339
+ 8 11793
+ 9 15477
+10 15308
+11 12136
+12 11108
+13 10809
+14  8673
+15  5692
+16  5642
+17  6562
+18  5734
+19  6135
+20  9620
+21  8928
+22  6087
+23  3144
+
+====================================================================================================
+5. MESSAGE_CODES
+====================================================================================================
+Top-20 message_codes auf der Münchner Stammstrecke, mit Bedeutung (Quelle: Travel::Status::DE::IRIS, derf):
+ code      c                                                                        bedeutung
+    7 119053                                               Unbefugte Personen auf der Strecke
+   36  31244                                                        Technische Störung am Zug
+    5  19763                                            Ärztliche Versorgung eines Fahrgastes
+   38  18012                                                            Defekt an der Strecke
+    0  14357 NICHT in der IRIS-Referenztabelle gefunden (evtl. datensatz-internes Sonderfeld)
+   43   8016                                           Verspätung eines vorausfahrenden Zuges
+   55   3865                                          Technischer Defekt an einem anderen Zug
+   48   2836                                                  Verspätung aus vorheriger Fahrt
+   80   1522                                                         Abweichende Wagenreihung
+   41   1431                                                     Defekt an einem Bahnübergang
+   44    918                                           Warten auf einen entgegenkommenden Zug
+   57    892                                                                Zusätzlicher Halt
+   62    473                                                          Behobener Defekt am Zug
+ 1000    318 NICHT in der IRIS-Referenztabelle gefunden (evtl. datensatz-internes Sonderfeld)
+   42    277                                     Außerplanmäßige Geschwindigkeitsbeschränkung
+   21    264                                                     Warten auf Anschlussreisende
+   24    250                                                            Verspätung im Ausland
+   45    238                                                     Vorfahrt eines anderen Zuges
+   85    220                                                                  Ein Wagen fehlt
+   58    216                                                                        Umleitung
+
+Hinweis: Codes 0 und 1000 sind in der derf-Referenztabelle NICHT dokumentiert. Ohne verlässliche
+Quelle für diese beiden Werte wird hier bewusst KEINE Bedeutung behauptet.
+
+====================================================================================================
+6. ERSTE INHALTLICHE BEFUNDE (Stammstrecke, is_final=True Zeilen = letzte Prognose je Halt)
+====================================================================================================
+Verspätung nach Linie (finale Prognose, is_cancelled=False):
+      count        mean  median
+line                           
+S1     3961  351.123454   180.0
+S8     3081  247.439143   120.0
+S6     2691  311.371237   180.0
+S3     2631  345.062714   180.0
+S2     2595  234.612717   120.0
+S4     2473  347.068338   180.0
+S5     1879  256.061735   180.0
+S7      216  248.333333    60.0
+4        21  374.285714   360.0
+
+Verspätung nach Tageszeit:
+      count         mean  median
+hour                            
+0       699   104.206009   120.0
+1       485   106.144330   120.0
+2       398   333.015075   360.0
+3       417   203.021583   180.0
+4       162    92.592593    60.0
+5       586   168.020478   120.0
+6       792   142.878788   120.0
+7       983   192.695829   120.0
+8       805   887.925466   120.0
+9       666  1169.459459  1080.0
+10      901   648.213097   540.0
+11      945   477.206349   360.0
+12      857   566.464411   360.0
+13      935   196.748663   120.0
+14     1040   172.557692   120.0
+15     1044   130.747126   120.0
+16     1040   171.807692   120.0
+17     1043   189.894535   180.0
+18     1043   178.906999   180.0
+19     1044   140.172414   120.0
+20      941   521.317747   180.0
+21      927   188.284790   120.0
+22      993   186.102719   120.0
+23      802    96.658354    60.0
+
+Verspätung nach Position entlang der Stammstrecke (West -> Ost):
+                              count        mean  median
+name                                                   
+München-Pasing                 1010  308.910891   180.0
+München-Laim                   1720  300.348837   180.0
+München Hirschgarten           1720  315.209302   180.0
+München Donnersbergerbrücke    1936  309.886364   180.0
+München Hackerbrücke           1725  308.939130   120.0
+München Hauptbahnhof (tief)    1734  324.429066   180.0
+München Karlsplatz (Stachus)   1734  318.027682   180.0
+München Marienplatz            1734  308.235294   180.0
+München Isartor                1734  300.346021   120.0
+München Rosenheimer Platz      1734  295.986159   180.0
+München Ost                    1722  275.644599   120.0
+München Leuchtenbergring       1045  237.186603   120.0
+
+Korrelation delay(Halt i) vs. delay(Halt i-1, selbe trip_id, direkt vorheriger stop_sequence): r=0.961  (n=8,770 aufeinanderfolgende Halt-Paare)
+
+Plots geschrieben nach output/plots/: delay_by_position.png, delay_by_hour.png, delay_autocorrelation.png, stammstrecke_karte.png
+
+Fertig.
