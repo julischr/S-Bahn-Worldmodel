@@ -152,3 +152,16 @@ Tunnelverlauf klar als durchgehenden Bogen in den Koordinaten.
 - `outputs/run_log.txt` -- vollständige Konsolenausgabe des Skriptlaufs
 - `outputs/plots/` -- delay_by_position.png, delay_by_hour.png, delay_autocorrelation.png,
   stammstrecke_karte.png
+- `src/data/windowing.py` -- Pipeline zur Aggregation in 5-min-Matrizen
+- `tests/sanity_check.py` -- Validierung von Zeitindex, Imputation und Nacht-Lücken
+- `data/processed/state_matrix_5min.parquet` -- Berechnete Verspätungsmatrix
+- `data/processed/count_matrix_5min.parquet` -- Zugfrequenz pro 5-Minuten-Intervall
+
+## Architektur-Befunde: Preprocessing & Imputation (Status: Pipeline implementiert)
+
+Beim Überführen der asynchronen Roh-Updates in eine äquidistante 5-Minuten-Zustandsmatrix (`windowing.py`) wurden folgende kritische Datenrealitäten für das spätere ML-Training (VAR/XGBoost) gelöst:
+
+* **Unhashable Spalten & Duplikate:** Die Rohdaten enthalten Listen/NumPy-Arrays (wie `message_codes`). Ein systemweites `drop_duplicates()` wirft hier sofort `TypeError` (unhashable type). Diese Spalten müssen konsequent abgeworfen werden, *bevor* Zeilen-Duplikate entfernt werden.
+* **Der "stumme" Zeitsprung (Gruppierungs-Falle):** Pandas `groupby(pd.Grouper(freq='5min'))` lässt Intervalle, in denen systemweit kein Zug fährt (z. B. nachts zwischen 02:00 und 04:30 Uhr), im Index komplett weg. Für ein Vektorautoregressions-Modell (VAR) ist das tödlich, da es die Enden als benachbarte Zeitschritte (t und t+1) interpretiert. Der Index *muss* nachträglich per `reindex(pd.date_range(...))` lückenlos aufgespannt werden, um die Nachtlücken als leere Zeilen zu materialisieren.
+* **Kontrollierte Imputation & Episoden:** Kurzfristige Lücken (bis 30 Min) werden via Forward-Fill (`ffill(limit=6)`) überbrückt, da sich der Streckenzustand (Verspätungen) in der Zwischenzeit physikalisch nicht in Luft auflöst. Bei echten Nachtpausen (Lücken > 30 Min) greift das Limit, und die Zeilen fallen auf `NaN`.
+* **Architektur-Entscheidung:** Diese massiven `NaN`-Blöcke in der Nacht werden nicht mit Nullen aufgefüllt. Stattdessen dienen sie dem nachgelagerten ML-Skript als natürliche Sollbruchstellen, um den kontinuierlichen Datenstrom in unabhängige "Tages-Episoden" (Episodic Training) zu zerschneiden.

@@ -66,16 +66,27 @@ def create_stammstrecke_state_matrix(
     # 1. IDs sicher laden
     STAMM_STATIONEN = get_validated_stammstrecke_ids(stations_csv)
 
-    # 2. Daten laden und exakte Duplikate entfernen
+# 2. Daten laden und exakte Duplikate entfernen
     parquet_files = list(data_dir.glob("*.parquet"))
     if not parquet_files:
-        raise FileNotFoundError(f"Keine Parquet-Dateien in {data_dir} gefunden.")
-
-    print(f"\nLade {len(parquet_files)} Datei(en)...")
+        raise FileNotFoundError(f"Keine Parquet-Dateien in {data_dir} gefunden!")
+        
+    print(f"\nLade {len(parquet_files)} Datei(en) aus {data_dir}...")
     
     df = pd.concat([pd.read_parquet(f) for f in parquet_files], ignore_index=True)
-    initial_len = len(df)
     
+    # --- FIX START ---
+    # Wir behalten nur die Spalten, die wir wirklich brauchen. 
+    # Das wirft auch die unhashbaren Array-Spalten (wie message_codes) raus.
+    needed_cols = [
+        'trip_id', 'stop_id', 'is_final', 'is_cancelled', 
+        'pickup_drop_off_type', 'is_arrival', 'delay', 
+        'time_schedule', 'update_timestamp', 'category'
+    ]
+    df = df[[c for c in needed_cols if c in df.columns]].copy()
+    # --- FIX ENDE ---
+
+    initial_len = len(df)
     df = df.drop_duplicates()
     print(f"Exakte Datei-Duplikate entfernt: {initial_len - len(df)} Zeilen")
 
@@ -123,6 +134,12 @@ def create_stammstrecke_state_matrix(
     count_matrix = count_matrix.reindex(columns=ordered_names)
 
     # 8. Kontrollierte Imputation (30 Minuten überbrücken)
+    # Vor ffill: Zeitindex lückenlos von Start bis Ende erzwingen
+    full_idx = pd.date_range(start=state_matrix.index.min(), end=state_matrix.index.max(), freq=freq)
+    state_matrix = state_matrix.reindex(full_idx)
+    count_matrix = count_matrix.reindex(full_idx, fill_value=0)
+
+    # Jetzt greift ffill kontrolliert für 30 Minuten – der Rest der Nacht bleibt sauber NaN
     state_matrix = state_matrix.ffill(limit=6)
     
     # Speichern
