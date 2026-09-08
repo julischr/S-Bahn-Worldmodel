@@ -19,5 +19,8 @@ outputs/*
 outputs/plots/*
 !outputs/plots/.gitkeep
 
+# Test / Experiment files
+*.ipynb
+
 # Virtual environments
 .venv
