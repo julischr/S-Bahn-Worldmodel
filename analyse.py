@@ -1,3 +1,5 @@
 import duckdb
-d = "2025-01-01.parquet"
-duckdb.sql(f"DESCRIBE SELECT * FROM '{d}'").show(max_rows=60)
+
+from src.utils.constants import RAW_2025_01_01
+
+duckdb.sql(f"DESCRIBE SELECT * FROM '{RAW_2025_01_01}'").show(max_rows=60)

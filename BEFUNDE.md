@@ -1,13 +1,13 @@
 # Befunde: Bahn-Vorhersage-Tagesdatei 2025-01-01, Fokus Münchner S-Bahn-Stammstrecke
 
 Alle Zahlen in diesem Dokument stammen aus dem tatsächlichen Lauf von `explore.py`
-gegen `2025-01-01.parquet` (Log: `output/run_log.txt`). Nichts ist geschätzt.
+gegen `data/raw/2025-01-01.parquet` (Log: `outputs/run_log.txt`). Nichts ist geschätzt.
 
 **Wichtigste Einschränkung vorab:** Der 1.1. ist Neujahr, ein gesetzlicher Feiertag.
 Der Betrieb entspricht einem Sonn-/Feiertagsfahrplan (reduzierter Takt, andere
 Lastspitzen). Für alles, was mit *normalem* Werktagsbetrieb zu tun hat -- Pendlerspitzen,
 Regel-Verspätungsniveau, Kapazitätsgrenzen der Stammstrecke im HVZ -- braucht es
-mindestens einen Dienstag/Mittwoch/Donnerstag aus `2025.tar`, der kein Feiertag und
+mindestens einen Dienstag/Mittwoch/Donnerstag aus `data/raw/2025.tar`, der kein Feiertag und
 keine Ferienzeit ist.
 
 ## Was drin ist
@@ -30,7 +30,7 @@ der jeweiligen Abfrage/Prognose-Aktualisierung, `is_final` markiert (in 994.672 
 lässt sich der volle Prognoseverlauf je Halt rekonstruieren -- genau die Grundlage, die
 für ein Verspätungsfortpflanzungsmodell gebraucht wird. Ein konkretes Beispiel
 (trip_id=3626237496988271079, stop_id=8004134, Ankunft) mit 10 Meldungen liegt in
-`output/beispiel_prognose_verlauf.csv`: die Prognose wandert dort von "pünktlich" über
+`outputs/beispiel_prognose_verlauf.csv`: die Prognose wandert dort von "pünktlich" über
 120s, 180s, 300s... bis 480s (final) -- ein sauberer Fall von schrittweise wachsender
 Verspätungsprognose. 25,6% aller Halt-Ereignisse haben aber nur EINE Meldung -- für diese
 lässt sich kein Prognoseverlauf beobachten, nur der Endzustand.
@@ -68,7 +68,7 @@ Zuordnungstabelle stammt aus dem Quellcode des Perl-Moduls
 `Travel::Status::DE::IRIS::Result` (github.com/derf/Travel-Status-DE-IRIS), einer seit
 Jahren gepflegten, community-reverse-engineerten Referenz für die numerischen IRIS-
 Meldungscodes. Die volle Top-20-Tabelle liegt in
-`output/message_codes_top20_stammstrecke.csv`. **Codes 0 und 1000 kommen in dieser Referenz
+`outputs/message_codes_top20_stammstrecke.csv`. **Codes 0 und 1000 kommen in dieser Referenz
 nicht vor** (0: 14.357 Vorkommen, 1000: 318) -- dafür wurde keine verlässliche Quelle
 gefunden, ihre Bedeutung bleibt bewusst offen.
 
@@ -116,7 +116,7 @@ Tunnelverlauf klar als durchgehenden Bogen in den Koordinaten.
    Linie/Tageszeit/Position, Autokorrelation) basiert auf dem 1.1., einem Feiertag mit
    Sonderfahrplan und vermutlich atypischem Fahrgastverhalten. Für alles, was allgemein
    über den Stammstreckenbetrieb aussagen soll, muss mindestens ein normaler Dienstag
-   bis Donnerstag außerhalb der Schulferien aus `2025.tar` dazukommen -- am besten
+   bis Donnerstag außerhalb der Schulferien aus `data/raw/2025.tar` dazukommen -- am besten
    mehrere, um Tag-zu-Tag-Schwankung von echtem Muster zu trennen.
 2. **Granularität zuerst entscheiden, dann filtern.** Wer naiv über alle 3,58 Mio. Zeilen
    aggregiert, mischt Prognose-Historie und Endzustand und zählt manche Halt-Ereignisse
@@ -144,11 +144,11 @@ Tunnelverlauf klar als durchgehenden Bogen in den Koordinaten.
 ## Dateien
 
 - `explore.py` -- reproduzierbares Skript (`uv run python explore.py`)
-- `output/muenchen_stationen.csv` -- alle 149 Münchner S-Bahn-Halte mit Zuordnung und
+- `outputs/muenchen_stationen.csv` -- alle 149 Münchner S-Bahn-Halte mit Zuordnung und
   Konfidenz-Einschätzung
-- `output/message_codes_top20_stammstrecke.csv`
-- `output/beispiel_prognose_verlauf.csv`
-- `output/inventur_spalten.csv`
-- `output/run_log.txt` -- vollständige Konsolenausgabe des Skriptlaufs
-- `output/plots/` -- delay_by_position.png, delay_by_hour.png, delay_autocorrelation.png,
+- `outputs/message_codes_top20_stammstrecke.csv`
+- `outputs/beispiel_prognose_verlauf.csv`
+- `outputs/inventur_spalten.csv`
+- `outputs/run_log.txt` -- vollständige Konsolenausgabe des Skriptlaufs
+- `outputs/plots/` -- delay_by_position.png, delay_by_hour.png, delay_autocorrelation.png,
   stammstrecke_karte.png

@@ -22,13 +22,15 @@ import pandas as pd
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from src.utils.constants import OUTPUTS_DIR, PLOTS_DIR, RAW_2025_01_01
+
 pd.set_option("display.width", 220)
 pd.set_option("display.max_rows", 200)
 pd.set_option("display.max_columns", 40)
 
-DATA_FILE = "2025-01-01.parquet"
-OUT_DIR = Path("output")
-PLOT_DIR = OUT_DIR / "plots"
+DATA_FILE = RAW_2025_01_01
+OUT_DIR = OUTPUTS_DIR
+PLOT_DIR = PLOTS_DIR
 OUT_DIR.mkdir(exist_ok=True)
 PLOT_DIR.mkdir(parents=True, exist_ok=True)
 

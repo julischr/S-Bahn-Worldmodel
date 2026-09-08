@@ -7,11 +7,17 @@ wheels/
 *.egg-info
 
 # data files
-*.tar
-*.parquet
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
 
-output/*.csv
-output/plots/
+outputs/*
+!outputs/.gitkeep
+!outputs/run_log.txt
+!outputs/plots/
+outputs/plots/*
+!outputs/plots/.gitkeep
 
 # Virtual environments
 .venv
