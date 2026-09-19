@@ -1,0 +1,59 @@
+code,bedeutung,n_episoden,anteil_isoliert
+48,Verspätung aus vorheriger Fahrt,3482,0.005169442848937392
+43,Verspätung eines vorausfahrenden Zuges,2968,0.09467654986522911
+44,Warten auf einen entgegenkommenden Zug,2386,0.004191114836546521
+36,Technische Störung am Zug,2061,0.012130033964095099
+34,Defekt an einem Signal,1610,0.011180124223602485
+45,Vorfahrt eines anderen Zuges,1356,0.0014749262536873156
+38,Defekt an der Strecke,878,0.02050113895216401
+31,Bauarbeiten,855,0.026900584795321637
+64,Defekt an einer Weiche,683,0.016105417276720352
+41,Defekt an einem Bahnübergang,638,0.009404388714733543
+42,Außerplanmäßige Geschwindigkeitsbeschränkung,627,0.006379585326953748
+2,Polizeieinsatz,603,0.008291873963515755
+23,Betriebsstabilisierung,567,0.005291005291005291
+5,Ärztliche Versorgung eines Fahrgastes,522,0.007662835249042145
+61,Defekte Tür,441,0.0045351473922902496
+57,Zusätzlicher Halt,433,0.0
+55,Technischer Defekt an einem anderen Zug,418,0.0023923444976076554
+7,Unbefugte Personen auf der Strecke,389,0.028277634961439587
+32,Längere Haltezeit am Bahnhof,377,0.0
+51,Verspätetes Personal aus vorheriger Fahrt,374,0.0106951871657754
+67,Behördliche Maßnahme,323,0.006191950464396285
+47,Verspätete Bereitstellung,314,0.012738853503184714
+25,Bereitstellung weiterer Wagen,294,0.003401360544217687
+40,Defektes Stellwerk,259,0.003861003861003861
+33,Defekt an der Oberleitung,134,0.007462686567164179
+21,Warten auf Anschlussreisende,133,0.0
+3,Feuerwehreinsatz auf der Strecke,123,0.008130081300813009
+8,Notarzteinsatz auf der Strecke,117,0.03418803418803419
+58,Umleitung,93,0.0
+28,Gegenstände auf der Strecke,82,0.0
+54,Verfügbarkeit der Gleise derzeit eingeschränkt,81,0.0
+6,Betätigen der Notbremse,64,0.0
+13,Pass- und Zollkontrolle,56,0.0
+14,Defekt am Bahnhof,45,0.0
+22,Witterungsbedingte Beeinträchtigungen,35,0.0
+49,Kurzfristiger Personalausfall,29,0.0
+10,Tiere auf der Strecke,29,0.0
+37,Kurzfristiger Fahrzeugausfall,23,0.043478260869565216
+15,Beeinträchtigung durch Vandalismus,22,0.0
+17,Beschädigung einer Brücke,16,0.0
+50,Kurzfristige Erkrankung von Personal,15,0.0
+69,Zug verkehrt mit verminderter Geschwindigkeit,15,0.0
+26,Abhängen von Wagen,15,0.0
+63,Technische Untersuchung am Zug,13,0.0
+60,Witterungsbedingt verminderte Geschwindigkeit,12,0.0
+62,Behobener Defekt am Zug,12,0.0
+35,Streckensperrung,10,0.0
+68,Hohes Fahrgastaufkommen,9,0.0
+18,Umgestürzter Baum auf der Strecke,6,0.0
+24,Verspätung im Ausland,4,0.0
+11,Unwetter,2,0.0
+19,Unfall an einem Bahnübergang,2,0.0
+53,Unwetterauswirkungen,1,0.0
+12,Warten auf ein verspätetes Schiff,1,0.0
+56,Laden der Antriebsbatterie,1,0.0
+30,Personalausfall im Stellwerk,1,0.0
+65,Erdrutsch,1,0.0
+9,Streikauswirkungen,1,0.0

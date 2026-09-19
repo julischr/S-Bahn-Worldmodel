@@ -1,0 +1,4 @@
+variante,n_real,n_puenktlich,quote,beg_puenktlichkeit_2025,beg_ausfallquote_2025,eigene_ausfallquote
+"Ankunft, Gesamtnetz (Hauptvergleich)",9282673,7676384,0.8269583556374334,0.879,0.084,0.028279395165051246
+"Abfahrt, Gesamtnetz",9282784,7789721,0.8391578431642921,0.879,0.084,0.028279395165051246
+"Ankunft, nur Stammstrecke",3490791,2660437,0.7621301303916505,0.879,0.084,0.028279395165051246

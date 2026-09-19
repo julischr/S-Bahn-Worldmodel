@@ -1,0 +1,59 @@
+code,bedeutung,gemeinsame_fenster,lift
+11,Unwetter,24,2.9277500904863993
+30,Personalausfall im Stellwerk,6,2.9277500904863993
+56,Laden der Antriebsbatterie,12,2.9277500904863993
+12,Warten auf ein verspätetes Schiff,3,2.9277500904863993
+60,Witterungsbedingt verminderte Geschwindigkeit,130,2.8403545653972526
+68,Hohes Fahrgastaufkommen,99,2.5650199907801197
+18,Umgestürzter Baum auf der Strecke,28,2.342200072389119
+49,Kurzfristiger Personalausfall,188,2.255807446768209
+22,Witterungsbedingte Beeinträchtigungen,161,2.212994199851222
+19,Unfall an einem Bahnübergang,20,2.168703770730666
+3,Feuerwehreinsatz auf der Strecke,1030,2.1417490008529767
+26,Abhängen von Wagen,50,1.9782095205989183
+65,Erdrutsch,4,1.9518333936575998
+9,Streikauswirkungen,2,1.9518333936575998
+63,Technische Untersuchung am Zug,43,1.9368192906294641
+28,Gegenstände auf der Strecke,491,1.9116027851447097
+54,Verfügbarkeit der Gleise derzeit eingeschränkt,245,1.8876283478135996
+17,Beschädigung einer Brücke,89,1.8746025759229463
+14,Defekt am Bahnhof,407,1.8531792952223396
+24,Verspätung im Ausland,12,1.8491053203071994
+58,Umleitung,260,1.8431356501851421
+57,Zusätzlicher Halt,1539,1.8338654412936786
+62,Behobener Defekt am Zug,43,1.8245399114625385
+8,Notarzteinsatz auf der Strecke,683,1.8129223135106172
+7,Unbefugte Personen auf der Strecke,2516,1.8103266718269306
+33,Defekt an der Oberleitung,828,1.8090873693453269
+2,Polizeieinsatz,3345,1.7802806858165798
+40,Defektes Stellwerk,1525,1.7578027118077788
+34,Defekt an einem Signal,9752,1.7361762774352911
+55,Technischer Defekt an einem anderen Zug,1583,1.7312769492865032
+5,Ärztliche Versorgung eines Fahrgastes,2498,1.7196143254255876
+67,Behördliche Maßnahme,1181,1.6752290973180413
+13,Pass- und Zollkontrolle,176,1.6730000517065138
+35,Streckensperrung,48,1.6730000517065136
+51,Verspätetes Personal aus vorheriger Fahrt,1111,1.6672118659817474
+64,Defekt an einer Weiche,4959,1.6600403268605137
+36,Technische Störung am Zug,6820,1.6575838964898921
+23,Betriebsstabilisierung,1895,1.6375697820164479
+38,Defekt an der Strecke,6247,1.6230060178603725
+61,Defekte Tür,1164,1.6181866596990355
+48,Verspätung aus vorheriger Fahrt,17627,1.5978033637265479
+44,Warten auf einen entgegenkommenden Zug,9519,1.5918919924224615
+45,Vorfahrt eines anderen Zuges,5113,1.5864334689123525
+15,Beeinträchtigung durch Vandalismus,55,1.5633616988034171
+42,Außerplanmäßige Geschwindigkeitsbeschränkung,2638,1.5628095383859006
+6,Betätigen der Notbremse,217,1.5533539599891166
+25,Bereitstellung weiterer Wagen,961,1.5459163939326537
+10,Tiere auf der Strecke,125,1.537683871053781
+47,Verspätete Bereitstellung,891,1.5281929294805985
+31,Bauarbeiten,2920,1.4696631019804514
+32,Längere Haltezeit am Bahnhof,1042,1.4424187207029917
+41,Defekt an einem Bahnübergang,3215,1.36080909945262
+21,Warten auf Anschlussreisende,358,1.3420416547940215
+50,Kurzfristige Erkrankung von Personal,57,1.335054041261798
+43,Verspätung eines vorausfahrenden Zuges,30506,1.295587917379319
+37,Kurzfristiger Fahrzeugausfall,42,1.2055441549061643
+69,Zug verkehrt mit verminderter Geschwindigkeit,25,0.9383814392584612
+53,Unwetterauswirkungen,0,0.0

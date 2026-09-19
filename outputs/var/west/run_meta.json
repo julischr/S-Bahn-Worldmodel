@@ -1,0 +1,9 @@
+{
+  "richtung": "West",
+  "chosen_p": 17,
+  "aic_p": 20,
+  "T_obs": 71450,
+  "n_episodes": 698,
+  "n_boot": 200,
+  "max_abs_eigenvalue": 0.9714477209120714
+}

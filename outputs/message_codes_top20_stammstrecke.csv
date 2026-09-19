@@ -1,0 +1,21 @@
+code,c,bedeutung
+7,119053,Unbefugte Personen auf der Strecke
+36,31244,Technische Störung am Zug
+5,19763,Ärztliche Versorgung eines Fahrgastes
+38,18012,Defekt an der Strecke
+0,14357,NICHT in der IRIS-Referenztabelle gefunden (evtl. datensatz-internes Sonderfeld)
+43,8016,Verspätung eines vorausfahrenden Zuges
+55,3865,Technischer Defekt an einem anderen Zug
+48,2836,Verspätung aus vorheriger Fahrt
+80,1522,Abweichende Wagenreihung
+41,1431,Defekt an einem Bahnübergang
+44,918,Warten auf einen entgegenkommenden Zug
+57,892,Zusätzlicher Halt
+62,473,Behobener Defekt am Zug
+1000,318,NICHT in der IRIS-Referenztabelle gefunden (evtl. datensatz-internes Sonderfeld)
+42,277,Außerplanmäßige Geschwindigkeitsbeschränkung
+21,264,Warten auf Anschlussreisende
+24,250,Verspätung im Ausland
+45,238,Vorfahrt eines anderen Zuges
+85,220,Ein Wagen fehlt
+58,216,Umleitung

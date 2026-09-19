@@ -6,18 +6,20 @@ dist/
 wheels/
 *.egg-info
 
-# data files
+# data files (raw + derived matrices are large / regenerable -- never commit)
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+data/01_muenchen/*
+!data/01_muenchen/.gitkeep
+data/02_events/*
+!data/02_events/.gitkeep
+data/03_state_vector/*
+!data/03_state_vector/.gitkeep
 
-outputs/*
-!outputs/.gitkeep
-!outputs/run_log.txt
-!outputs/plots/
-outputs/plots/*
-!outputs/plots/.gitkeep
+# outputs/ holds small analysis results (CSVs, plots, logs) -- these ARE meant
+# to be committed, so nothing under outputs/ is ignored here.
 
 # Test / Experiment files
 *.ipynb

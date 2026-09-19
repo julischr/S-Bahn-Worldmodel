@@ -1,0 +1,14 @@
+{
+  "richtung": "Ost",
+  "n_daily_harmonics": 4,
+  "n_weekly_harmonics": 3,
+  "chosen_p": 5,
+  "aic_optimal_p": 17,
+  "T_obs": 80530,
+  "n_episodes": 686,
+  "n_boot": 500,
+  "boot_time_sec": 26.00435781478882,
+  "horizon_steps": 48,
+  "horizon_minutes": 240.0,
+  "max_abs_eigenvalue": 0.9437016313017569
+}
