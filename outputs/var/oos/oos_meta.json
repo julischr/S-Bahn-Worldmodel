@@ -1,0 +1,7 @@
+{
+  "train_episodes": 542,
+  "train_obs": 63298,
+  "test_episodes": 144,
+  "test_obs": 20662,
+  "p_fixed": 5
+}

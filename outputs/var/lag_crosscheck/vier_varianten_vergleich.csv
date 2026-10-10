@@ -1,0 +1,5 @@
+variante,peak_min,amplitude_s,mean_foreign_fevd,max_abs_eig,top_quelle,top_quelle_wert,top_senke,top_senke_wert
+"Ost p=5 (Hauptlauf, BIC-optimal)",25.0,53.70682652009508,0.6879010175569817,0.9437016313017569,Pasing,2.537660983912964,Ostbahnhof,-0.7939895631067294
+"Ost p=17 (Kreuzvergleich, AIC-Kandidat von West)",25.0,52.25869217949158,0.6892419309580378,0.9688315310408436,Pasing,2.3130122289255652,Ostbahnhof,-0.7888926170024899
+"West p=17 (Hauptlauf, BIC-optimal)",25.0,45.0835281235931,0.7177903032574603,0.9714477209120714,Rosenheimer_Platz,2.2410985030598796,Hackerbruecke,-0.8227819525086144
+"West p=5 (Kreuzvergleich, BIC-optimal von Ost)",25.0,47.27400830714407,0.7102104091301845,0.9449804608542067,Rosenheimer_Platz,2.4638083793487295,Laim,-0.8009553393051836

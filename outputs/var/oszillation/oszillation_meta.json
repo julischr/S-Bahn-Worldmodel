@@ -1,0 +1,6 @@
+{
+  "n_episodes_original": 686,
+  "n_episodes_placebo": 686,
+  "tau_monoton_fit_min": 17.65728337134125,
+  "anteil_hump_ausserhalb_ci": 0.0
+}

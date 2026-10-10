@@ -1,0 +1,9 @@
+{
+  "n_episodes": 707,
+  "total_obs_raw": 81729,
+  "chosen_p": 9,
+  "T": 75366,
+  "max_abs_eig": 0.9710477376729579,
+  "fevd_west_on_ost_mean": 0.11316309361263034,
+  "fevd_ost_on_west_mean": 0.11172137638122041
+}

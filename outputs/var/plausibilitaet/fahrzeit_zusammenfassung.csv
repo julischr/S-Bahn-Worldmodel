@@ -1,0 +1,3 @@
+richtung,n_trips_roh,n_trips_plausibel,n_ausgeschlossen_unplausibel,median_min,mean_min,std_min,p10_min,p90_min,min_min,max_min,diff_zu_var_peak_25min
+Ost,46944,46944,0,21.0,21.889677062031357,1.293066145380496,21.0,23.0,21.0,28.0,-4.0
+West,48124,48124,0,21.0,20.81136231402211,1.065285199315963,20.0,21.0,20.0,81.0,-4.0
