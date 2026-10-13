@@ -1,0 +1,47 @@
+{
+ "cancel": {
+  "params": {
+   "learning_rate": 0.08,
+   "feature_fraction": 0.8,
+   "bagging_fraction": 0.8,
+   "bagging_freq": 1,
+   "lambda_l2": 5.0,
+   "max_bin": 127,
+   "num_threads": 10,
+   "verbose": -1,
+   "seed": 7,
+   "objective": "binary",
+   "metric": "binary_logloss",
+   "num_leaves": 31,
+   "min_data_in_leaf": 100
+  },
+  "best_iter": 255
+ },
+ "class": {
+  "params": {
+   "learning_rate": 0.08,
+   "feature_fraction": 0.8,
+   "bagging_fraction": 0.8,
+   "bagging_freq": 1,
+   "lambda_l2": 5.0,
+   "max_bin": 127,
+   "num_threads": 10,
+   "verbose": -1,
+   "seed": 7,
+   "objective": "multiclass",
+   "num_class": 19,
+   "metric": "multi_logloss",
+   "num_leaves": 127,
+   "min_data_in_leaf": 100
+  },
+  "best_iter": 143
+ },
+ "rand": {
+  "n_lo": 4003,
+  "n_hi": 606,
+  "lo_mean": -1.509617786660005,
+  "hi_mean": 9.587458745874587,
+  "lo_min": -157.0,
+  "hi_max": 153.0
+ }
+}

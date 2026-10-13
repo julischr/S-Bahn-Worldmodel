@@ -1,0 +1,13 @@
+Zeilen gesamt 2751924, nach plan_run<=15: 2751915; train=1576674, val=229623, cal=267957, test=677661
+cancel_next-Rate: train=0.00168 (n_cancel=2643), val=0.00155 (n_cancel=356), cal=0.00038 (n_cancel=101), test=0.00262 (n_cancel=1773)
+cancel {'num_leaves': 31, 'min_data_in_leaf': 100, 'best_iter': 255, 'val_logloss': np.float64(0.007160821965885333), 'sec': 9}
+cancel {'num_leaves': 31, 'min_data_in_leaf': 1000, 'best_iter': 205, 'val_logloss': np.float64(0.00722912670628942), 'sec': 8}
+cancel {'num_leaves': 127, 'min_data_in_leaf': 100, 'best_iter': 125, 'val_logloss': np.float64(0.007239655206215532), 'sec': 9}
+cancel {'num_leaves': 127, 'min_data_in_leaf': 1000, 'best_iter': 104, 'val_logloss': np.float64(0.0071783374455703704), 'sec': 9}
+cancel: bestes Modell {'params': {'learning_rate': 0.08, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'bagging_freq': 1, 'lambda_l2': 5.0, 'max_bin': 127, 'num_threads': 10, 'verbose': -1, 'seed': 7, 'objective': 'binary', 'metric': 'binary_logloss', 'num_leaves': 31, 'min_data_in_leaf': 100}, 'best_iter': 255}
+class {'num_leaves': 31, 'min_data_in_leaf': 100, 'best_iter': 502, 'val_logloss': np.float64(0.9122210277782742), 'sec': 323}
+class {'num_leaves': 31, 'min_data_in_leaf': 1000, 'best_iter': 489, 'val_logloss': np.float64(0.9145632914030459), 'sec': 312}
+class {'num_leaves': 127, 'min_data_in_leaf': 100, 'best_iter': 143, 'val_logloss': np.float64(0.910915241701065), 'sec': 175}
+class {'num_leaves': 127, 'min_data_in_leaf': 1000, 'best_iter': 143, 'val_logloss': np.float64(0.9132515890492953), 'sec': 189}
+class: bestes Modell {'params': {'learning_rate': 0.08, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'bagging_freq': 1, 'lambda_l2': 5.0, 'max_bin': 127, 'num_threads': 10, 'verbose': -1, 'seed': 7, 'objective': 'multiclass', 'num_class': 19, 'metric': 'multi_logloss', 'num_leaves': 127, 'min_data_in_leaf': 100}, 'best_iter': 143}
+fertig

@@ -1,0 +1,4 @@
+tag,n_sim,n_train,n_both,nur_sim,nur_train,diff_d_k,diff_d_km1,diff_richtung,diff_line,diff_hour,diff_hvz,diff_wtype,diff_plan_gap_pred,diff_act_gap_pred,diff_d_pred_k,diff_d_pred_k1,diff_net_mean15,diff_net_n15,diff_cancel_sd30,diff_cancel_net30,diff_plan_run
+2025-10-07,8331,8331,8275,56,56,0,0,0,0,0,0,0,32,78,32,46,896,890,0,0,0
+2025-11-15,2431,2431,2421,10,10,0,0,0,0,0,0,0,20,31,20,19,48,48,0,4,0
+2025-12-03,9352,9352,9267,85,85,0,0,0,0,0,0,0,61,109,56,74,1405,1361,0,0,0

@@ -7,12 +7,15 @@ requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.5.5",
     "jupyterlab>=4.6.3",
+    "lightgbm>=4.7.0",
     "matplotlib>=3.11.1",
     "pandas>=3.0.5",
     "polars>=1.44.1",
     "pyarrow>=25.0.1",
     "pytz>=2026.3.post1",
+    "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
+    "shap>=0.53.0",
     "statsmodels>=0.15.0",
 ]
 

@@ -1,0 +1,7 @@
+modell,test,chi2,df,p
+Cox,Nichtlinearitaet Schwere (robuster Wald),39.636480484409816,2,2.4719951923257345e-09
+Cox,"Nichtlinearitaet Schwere (partieller LR, modellbasiert)",37.301134094042936,2,7.946239436710928e-09
+Cox,Interaktion Schwere x HVZ (robuster Wald),24.587980115168527,3,1.8827063692272384e-05
+AFT log-normal,Nichtlinearitaet Schwere (robuster Wald),75.656964075546,2,3.7264816946800926e-17
+AFT log-normal,"Nichtlinearitaet Schwere (LR, modellbasiert)",90.82105932036211,2,1.8987052370635123e-20
+AFT log-normal,Interaktion Schwere x HVZ (robuster Wald),29.515126612444533,3,1.7452772091217975e-06

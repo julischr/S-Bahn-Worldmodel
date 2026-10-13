@@ -1,0 +1,102 @@
+Basis 2025-11-12 hvz=True 33s Fenster 920 min
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:06:21 2025-11-12 hvz=True verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:06:55 2025-11-12 hvz=True verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:07:30 2025-11-12 hvz=True verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:08:04 2025-11-12 hvz=True ausfall 0 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:08:37 2025-11-12 hvz=True verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:09:14 2025-11-12 hvz=True verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:09:54 2025-11-12 hvz=True verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:10:33 2025-11-12 hvz=True ausfall 0 fertig
+Basis 2025-11-12 hvz=False 19s Fenster 457 min
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:11:11 2025-11-12 hvz=False verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:11:29 2025-11-12 hvz=False verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:11:47 2025-11-12 hvz=False verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:12:04 2025-11-12 hvz=False ausfall 0 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:12:22 2025-11-12 hvz=False verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:12:40 2025-11-12 hvz=False verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:12:58 2025-11-12 hvz=False verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:13:15 2025-11-12 hvz=False ausfall 0 fertig
+Basis 2025-12-03 hvz=True 49s Fenster 1069 min
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:14:54 2025-12-03 hvz=True verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:15:43 2025-12-03 hvz=True verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:16:32 2025-12-03 hvz=True verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:17:23 2025-12-03 hvz=True ausfall 0 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:18:14 2025-12-03 hvz=True verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:19:04 2025-12-03 hvz=True verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:19:54 2025-12-03 hvz=True verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:20:45 2025-12-03 hvz=True ausfall 0 fertig
+Basis 2025-12-03 hvz=False 24s Fenster 500 min
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:21:33 2025-12-03 hvz=False verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:21:57 2025-12-03 hvz=False verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:22:21 2025-12-03 hvz=False verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:22:45 2025-12-03 hvz=False ausfall 0 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:23:10 2025-12-03 hvz=False verspaetung 5 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:23:34 2025-12-03 hvz=False verspaetung 10 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:23:58 2025-12-03 hvz=False verspaetung 20 fertig
+/Users/julianschuler/Desktop/S-Bahn/src/simulator/scenarios.py:70: RuntimeWarning: Mean of empty slice
+  end_mean = np.nanmean(end_diff, axis=0)
+22:24:23 2025-12-03 hvz=False ausfall 0 fertig
+Szenarien a/b fertig 1149.7713899612427 32
+Sperrung fertig 2248.795645236969

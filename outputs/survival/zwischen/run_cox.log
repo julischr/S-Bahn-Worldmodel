@@ -1,0 +1,24 @@
+haupt_R15_180_station {'n_episoden': 14341, 'n_vollstaendig': 10504, 'n_ausgeschlossen': 3837, 'n_ereignisse': 4337, 'modell': 'haupt_R15_180_station'}
+neben_R15_180_strecke {'n_episoden': 14341, 'n_vollstaendig': 9245, 'n_ausgeschlossen': 5096, 'n_ereignisse': 963, 'modell': 'neben_R15_180_strecke'}
+neben_R15_360_station {'n_episoden': 14341, 'n_vollstaendig': 10504, 'n_ausgeschlossen': 3837, 'n_ereignisse': 7164, 'modell': 'neben_R15_360_station'}
+sens_R15_180_station_ohneFolgeZensur {'n_episoden': 14341, 'n_vollstaendig': 13536, 'n_ausgeschlossen': 805, 'n_ereignisse': 12296, 'modell': 'sens_R15_180_station_ohneFolgeZensur'}
+AFT lognormal loglik -21373.4 aic 42848.8 False grad_max 0.000244140625 Desired error not necessarily achieved due to precision loss.
+AFT weibull loglik -21637.4 aic 43376.8 False grad_max 0.000244140625 Desired error not necessarily achieved due to precision loss.
+Knoten (min): [ 1.  5.  9. 20.]
+           modell                                                     test       chi2  df             p
+0             Cox                 Nichtlinearitaet Schwere (robuster Wald)  39.636480   2  2.471995e-09
+1             Cox  Nichtlinearitaet Schwere (partieller LR, modellbasiert)  37.301134   2  7.946239e-09
+2             Cox                Interaktion Schwere x HVZ (robuster Wald)  24.587980   3  1.882706e-05
+3  AFT log-normal                 Nichtlinearitaet Schwere (robuster Wald)  75.656964   2  3.726482e-17
+4  AFT log-normal             Nichtlinearitaet Schwere (LR, modellbasiert)  90.821059   2  1.898705e-20
+5  AFT log-normal                Interaktion Schwere x HVZ (robuster Wald)  29.515127   3  1.745277e-06
+     quelle   hvz  steigung_unten  steigung_oben  verhaeltnis_punkt   verh_lo   verh_hi  n_boot_gueltig
+0  ereignis  alle       11.800000       9.633333           0.816384 -0.043130  1.032478             939
+1  ereignis     0        8.866667       2.433333           0.274436 -0.025877  0.633248             765
+2  ereignis     1       15.266667       7.190909           0.471020 -0.132377  0.810479             913
+3   placebo  alle        9.666667      11.838462           1.224668  0.946911  1.543981            1000
+4   placebo     0        6.966667       9.291667           1.333732  0.803808  2.166730            1000
+5   placebo     1       20.150000       9.696552           0.481218  0.341170  0.614428            1000
+6  placebo2  alle        9.000000      10.785714           1.198413  0.919355  1.500000            1000
+7  placebo2     0        7.000000      10.500000           1.500000  0.974931  2.600789            1000
+8  placebo2     1       18.000000       8.600000           0.477778  0.335131  0.678818            1000

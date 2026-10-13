@@ -1,0 +1,5 @@
+n_episoden,n_vollstaendig,n_ausgeschlossen,n_ereignisse,modell
+14341,10504,3837,4337,haupt_R15_180_station
+14341,9245,5096,963,neben_R15_180_strecke
+14341,10504,3837,7164,neben_R15_360_station
+14341,13536,805,12296,sens_R15_180_station_ohneFolgeZensur

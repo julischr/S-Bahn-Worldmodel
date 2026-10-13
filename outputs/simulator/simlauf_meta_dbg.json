@@ -1,0 +1,33 @@
+{
+ "n_clamp": 4664,
+ "n_hold": 0,
+ "ausfallquote_modelliert_echt": 0.027479057363981565,
+ "ausfallquote_modelliert_sim": 0.022796312936606857,
+ "n_positionen_modelliert": 34499,
+ "tage": [
+  "2025-11-23",
+  "2025-12-04",
+  "2025-12-19",
+  "2025-12-20"
+ ],
+ "plausibilitaet": {
+  "sim": {
+   "ueberholungen": 13289.0,
+   "paare": 672491.0,
+   "ueberholquote": 0.019760859253134987,
+   "gleiche_minute": 37521.0,
+   "gleiche_minute_quote": 0.05066085540572836,
+   "abstand_hoechstens_1min_quote": 0.18795729587338364,
+   "n_abstaende": 740631.0
+  },
+  "real": {
+   "ueberholungen": 265.0,
+   "paare": 33463.0,
+   "ueberholquote": 0.007919194334040583,
+   "gleiche_minute": 442.0,
+   "gleiche_minute_quote": 0.011988066178464877,
+   "abstand_hoechstens_1min_quote": 0.10208841876864659,
+   "n_abstaende": 36870.0
+  }
+ }
+}

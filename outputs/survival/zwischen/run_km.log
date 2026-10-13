@@ -1,0 +1,15 @@
+/Users/julianschuler/Desktop/S-Bahn/src/analysis/survival/run_km.py:71: RuntimeWarning: invalid value encountered in subtract
+  dm = bx["q_boot"][:, 1] - by["q_boot"][:, 1]
+/Users/julianschuler/Desktop/S-Bahn/src/analysis/survival/run_km.py:71: RuntimeWarning: invalid value encountered in subtract
+  dm = bx["q_boot"][:, 1] - by["q_boot"][:, 1]
+/Users/julianschuler/Desktop/S-Bahn/src/analysis/survival/run_km.py:71: RuntimeWarning: invalid value encountered in subtract
+  dm = bx["q_boot"][:, 1] - by["q_boot"][:, 1]
+                                                0
+test              Log-Rank k Gruppen (Codes >=50)
+chi2                                   219.337422
+df                                             28
+p_naiv                                        0.0
+n                                           13870
+wald_robust_chi2                       190.538347
+wald_robust_p                                 0.0
+Paarweise: 406 Tests, 62 mit Holm-p<0.05
