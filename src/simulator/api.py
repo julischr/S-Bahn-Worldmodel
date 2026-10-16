@@ -144,7 +144,7 @@ SimResult_t = object
 
 
 def simulate_day(datum, szenario: dict | None = None, runs: int = 200, seed: int = 21, models: Models | None = None,
-                 t_from: str | None = None, t_to: str | None = None):
+                 t_from: str | None = None, t_to: str | None = None, eintritt: str = "echt"):
     """simulate(datum, szenario) -> (Tabelle, Ergebnis). Szenario-Dict:
     {"art": "verspaetung", "linie": "S3", "uhrzeit": "08:00", "minuten": 10} oder mit "zug": ID;
     {"art": "ausfall", ...gleiche Zugangaben}; {"art": "sperrung", "station": 7, "von": "08:00", "bis": "08:30", "richtung": None}."""
@@ -161,7 +161,7 @@ def simulate_day(datum, szenario: dict | None = None, runs: int = 200, seed: int
     elif szenario and szenario.get("art") == "sperrung":
         sc = Scenario(kind="closure", rank=int(szenario["station"]), rich=szenario.get("richtung"),
                       t1=_hhmm_to_min(day, szenario["von"]) + day.m0, t2=_hhmm_to_min(day, szenario["bis"]) + day.m0)
-    res = simulate(day, models, R=runs, seed=seed, scenario=sc, t_start=t_start, t_end=t_end)
+    res = simulate(day, models, R=runs, seed=seed, scenario=sc, t_start=t_start, t_end=t_end, eintritt=eintritt)
     return result_table(day, res), res, day
 
 
@@ -174,11 +174,12 @@ def main():
     ap.add_argument("--station", type=int, default=7); ap.add_argument("--von", default="08:00"); ap.add_argument("--bis", default="08:30")
     ap.add_argument("--runs", type=int, default=200)
     ap.add_argument("--von-zeit", default=None); ap.add_argument("--bis-zeit", default=None)
+    ap.add_argument("--eintritt", default="echt", choices=["echt", "puenktlich"])
     ap.add_argument("--plot", default=None); ap.add_argument("--csv", default=None)
     a = ap.parse_args()
     sz = None if a.art == "keins" else dict(art=a.art, linie=a.linie, uhrzeit=a.uhrzeit, minuten=a.minuten, zug=a.zug,
                                             station=a.station, von=a.von, bis=a.bis)
-    tab, res, day = simulate_day(a.datum, sz, a.runs, t_from=a.von_zeit, t_to=a.bis_zeit)
+    tab, res, day = simulate_day(a.datum, sz, a.runs, t_from=a.von_zeit, t_to=a.bis_zeit, eintritt=a.eintritt)
     if a.csv:
         tab.to_csv(a.csv, index=False)
     if a.plot:

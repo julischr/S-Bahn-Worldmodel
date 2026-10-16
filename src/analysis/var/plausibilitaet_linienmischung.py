@@ -33,6 +33,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, PROJECT_ROOT
 from .stations import STATION_NAMES_WEST_OST, STOP_ID_TO_NAME
 from .prepare import pivot_direction
@@ -41,7 +42,7 @@ from .episodes import interpolate_short_gaps, build_daily_episodes
 from .run_all import EXCLUDED_DATES
 from .acf_check import acf_table_all_stations
 
-EVENTS_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_GLOB = str(events_final_dir() / "*.parquet")
 OUT_DIR = PROJECT_ROOT / "outputs" / "var" / "plausibilitaet"
 PLOT_DIR = PROJECT_ROOT / "outputs" / "var" / "plots"
 LAG_CROSSCHECK_DIR = PROJECT_ROOT / "outputs" / "var" / "lag_crosscheck"

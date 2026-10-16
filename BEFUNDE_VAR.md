@@ -1580,3 +1580,24 @@ naechsten tatsaechlich fahrenden Zug ersetzt -- was die in 11.4.2/11.6.2/11.7 ge
 Zuwachs-Effekte tendenziell eher unterschaetzt als ueberschaetzt haben duerfte (der am
 staerksten betroffene, ausgefallene Fall fehlt dort komplett). Dieser Befund ist in die
 Gesamtbewertung in 11.5 eingearbeitet.
+
+
+## Korrektur Datenausfall (nachträglich; alter Text oben unverändert)
+
+Datenausfall im Echtzeitfeed (21 volle Tage, v. a. September; Teilblöcke) — Methode und Liste in `outputs/korrektur_ausfall/KORREKTUR_DATENAUSFALL.md`. VAR neu mit bereinigtem Zustandsvektor und zusätzlich ausgeschlossenen vollen Ausfalltagen gerechnet (Ost 500, West 200 Bootstrap-Ziehungen; Ausgabe nur Kennzahlen). 11.4.2 und 11.8 neu aus den bereinigten Ereignissen.
+
+| Befund | alt | neu |
+|---|---|---|
+| BIC-Lag Ost | p = 5 (686 Episoden, T = 80.530) | **p = 4** (647 Episoden, T = 75.238) |
+| 25-min-Peak Pasing→Leuchtenbergring, fester Lag (Ost p = 5) | 25 min, 53,7 s | 25 min, 54,5 s |
+| dasselbe West (p = 17, kausal korrekte Ordnung) | 25 min, 45,1 s | 25 min, 46,8 s |
+| Peak bei BIC-Lag p = 4 (Ost) | – | **5 min**, Amplitude 2,6 s |
+| mittlere FEVD-Fremdvarianz Ost / West | 68,8 % / 71,8 % | 67,9 % / 70,5 % |
+| Netto-Kopplung Ost: Pasing / Ostbahnhof | +2,54 / −0,79 | +2,52 / −0,78 |
+| 11.4.2 Zuwachs vs Vorgänger, Abstand < 5 min | r = 0,064 (n = 867.069) | r = 0,056 (n = 796.613) |
+| 11.4.2 Abstand 5–10 min | r = 0,000 | r = −0,016 (KI −0,023…−0,010) |
+| 11.8 Ausfallrate Folgezug, Abstand < 5 min, Vorgänger ≤ 2 / 2–5 / 5–10 / > 10 min | 1,59 / 3,16 / 4,76 / 8,31 % | 1,93 / 3,16 / 4,76 / 8,28 % |
+| 11.8 Faktor „≤ 2 min → > 10 min“ (< 5 min Abstand) | 5,2 | 4,3 |
+| 11.8 Gesamtausfallrate Folgezug | 2,95 % | 3,19 % |
+
+**Ergebnis:** Die Kernaussage „25 Minuten Ausbreitung“ und die Quellen/Senken-Struktur bleiben bei festem Lag bestehen; Fremdvarianz −1 Prozentpunkt. **Aber:** Mit den bereinigten Daten wählt BIC in Richtung Ost p = 4 statt 5, und bei p = 4 liegt die Peak-Zeit bei 5 min statt 25 min. Das passt zu dem schon in Abschnitt 10.1 gefundenen Zusammenhang zwischen Lag und Peak-Zeit und verschärft ihn: die „25 Minuten“ sind an die Lagwahl gebunden, die selbst an einer knappen BIC-Entscheidung hängt (Ost BIC-Minimum p = 5 gegen p = 4 nicht gesondert getestet). 11.4.2 und 11.8 ändern sich kaum (nur die Zelle mit pünktlichem Vorgänger, weil dort die Null-Ausfallzeilen entfielen). Nicht neu gerechnet: Bootstrap-Bänder, Lag-Kreuzvergleiche, Oszillationen, Differenzen-VAR, übrige Plausibilitätstests; West-Haupttabellen der alten Läufe nutzen eine andere Cholesky-Ordnung (siehe 10.1), daher kein Direktvergleich.

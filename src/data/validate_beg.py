@@ -45,9 +45,10 @@ from __future__ import annotations
 import duckdb
 import pandas as pd
 
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, OUTPUTS_DIR
 
-EVENTS_FINAL_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_FINAL_GLOB = str(events_final_dir() / "*.parquet")
 OUT_PATH = OUTPUTS_DIR / "beg_validierung_2025.csv"
 
 PUENKTLICH_SCHWELLE_S = 360  # < 6 Minuten

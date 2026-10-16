@@ -17,12 +17,17 @@ data/02_events/*
 !data/02_events/.gitkeep
 data/03_state_vector/*
 !data/03_state_vector/.gitkeep
+# derived Ausfall-Block-Suche (regenerable via src/data/find_ausfall_bloecke.py)
+data/ausfall_*
 
 # outputs/ holds small analysis results (CSVs, plots, logs) -- these ARE meant
 # to be committed, so nothing under outputs/ is ignored here.
 
 # Test / Experiment files
 *.ipynb
+
+# macOS
+.DS_Store
 
 # Virtual environments
 .venv

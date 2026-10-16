@@ -115,7 +115,7 @@ class SimResult:
 
 def simulate(day: Day, models: Models | None, R: int, seed: int = 0, scenario: Scenario | None = None,
              t_start: int | None = None, forced: bool = False, collect: bool = False,
-             crn_seed: int | None = None, t_end: int | None = None) -> SimResult:
+             crn_seed: int | None = None, t_end: int | None = None, eintritt: str = "echt") -> SimResult:
     N, P, M = day.N, day.P, day.M
     sc = scenario or Scenario()
     rng = np.random.default_rng([seed if crn_seed is None else crn_seed, int(pd.Timestamp(day.opday).strftime("%Y%m%d"))])
@@ -150,7 +150,12 @@ def simulate(day: Day, models: Models | None, R: int, seed: int = 0, scenario: S
         cancel_zug = day.zug_index[int(sc.zug)]
 
     # ---- Replay-Initialisierung ----
-    ent = day.entry_pos
+    if eintritt not in ("echt", "puenktlich"):
+        raise ValueError("eintritt muss 'echt' oder 'puenktlich' sein")
+    if eintritt == "puenktlich" and (t_start is not None or forced):
+        raise ValueError("eintritt='puenktlich' geht nur ohne t_start/forced (ganzer Tag)")
+    # puenktlich: alle Zuege (auch in den Daten ausgefallene) treten am ersten Halt ihres Pfades mit 0 min ein
+    ent = np.zeros(N, np.int16) if eintritt == "puenktlich" else day.entry_pos
     started = np.zeros(N, bool)
     t_cut = -10**9 if t_start is None else t_start
     # Zuege ohne Fahrt / Praefix-Ausfaelle: Replay der Datenausfaelle (bekannt zur Planzeit)
@@ -220,6 +225,8 @@ def simulate(day: Day, models: Models | None, R: int, seed: int = 0, scenario: S
             continue
         a = int(day.real_min[n, e])
         dl = float(day.delay_real[n, e])
+        if eintritt == "puenktlich":
+            a, dl = int(day.sched_min[n, e]), 0.0
         if sc.kind == "delay" and cancel_zug == n:
             dl = float(sc.delay_abs_min)
             a = int(day.sched_min[n, e] + dl)

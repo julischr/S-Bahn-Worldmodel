@@ -22,9 +22,10 @@ from src.analysis.stoerungsinventur import (
     build_episodes_for_code,
     load_hits,
 )
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, OUTPUTS_DIR, PLOTS_DIR
 
-EVENTS_FINAL_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_FINAL_GLOB = str(events_final_dir() / "*.parquet")
 CODE_ZERO = 0
 ISOLATION_WINDOW_MIN = 60
 

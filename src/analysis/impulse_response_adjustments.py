@@ -38,10 +38,11 @@ from src.analysis.impulse_response_diagnostics import (
     build_base_events,
     load_all_disruption_hits,
 )
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, OUTPUTS_DIR, PLOTS_DIR
 
 REL_MINUTES = np.arange(PRE_MIN, POST_MIN + 1, 5)
-EVENTS_FINAL_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_FINAL_GLOB = str(events_final_dir() / "*.parquet")
 
 
 # ---------------------------------------------------------------------------

@@ -88,6 +88,9 @@ def km_bootstrap(t, e, day_idx, Wdays, grid=None, qs=QS, chunk=100):
 def ci_perc(x, lo=2.5, hi=97.5):
     """Perzentil-KI; inf-Werte zaehlen als 'nicht erreicht'."""
     x = np.asarray(x, float)
+    x = x[~np.isnan(x)]   # NaN (inf - inf bei nicht erreichten Medianen) ausblenden
+    if len(x) == 0:
+        return np.nan, np.nan
     return np.percentile(x, lo, method="nearest"), np.percentile(x, hi, method="nearest")
 
 

@@ -32,6 +32,9 @@ EXCLUDED_DATES = pd.to_datetime([
     "2025-01-11", "2025-01-12",  # Wochenende, stark reduzierter Betrieb (548/855 Zuege)
     "2025-06-07", "2025-06-08", "2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12",  # ganze Woche reduziert (~1200-1450 statt ~4700-5400)
 ]).date
+# Datenausfall-Bloecke (zentral, nur aktiv mit S_BAHN_AUSFALL_FILTER=1; sonst unveraendert): volle Ausfalltage zusaetzlich ausschliessen
+from src.utils.ausfall_bloecke import extend_excluded  # noqa: E402
+EXCLUDED_DATES = extend_excluded(EXCLUDED_DATES)
 
 
 def run_direction(richtung: str, station_order: list[str], p_range=range(1, 21), n_boot=500, horizon_min=240, seed=0):

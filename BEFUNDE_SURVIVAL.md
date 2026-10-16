@@ -97,3 +97,29 @@ Zahlen mit „p < 1e-6" sind numerisch kleiner als die Ausgabegenauigkeit der Ta
 ## Plots
 
 `outputs/survival/plots/`: 01 KM je Code (Meldestation, 180 s) · 02 dito Strecke · 03 Schwellen 180 vs. 360 · 04 Histogramm inkl. „ohne Wirkung" · 05 Forest-Plot Cox · 06 Erholungszeit je Schwereklasse nach HVZ · 07 Ausfallquote je Schwereklasse.
+
+
+## Korrektur Datenausfall (nachträglich; alter Text oben unverändert)
+
+**Ursache und Methode:** siehe `outputs/korrektur_ausfall/KORREKTUR_DATENAUSFALL.md`. Placebo-Zeitpunkte wurden zufällig gezogen und mussten „keine Auslöser-Meldung in [−60, +240] min“ erfüllen; in Datenausfallzeiten gibt es per Konstruktion keine Meldungen und alle Verspätungen sind 0, deshalb lagen viele Placebos dort (Erholung sofort). Neu: bereinigte Daten, außerdem Episoden und Placebos verworfen, deren Fenster [−60, +240] min einen Ausfall-Block berührt (97 von 14.336 Episoden; 5.587 von 46.123 P1, 1.263 von 41.194 P2). Neuer Stand (Meldestation, 180 s, R0, alle Auslöser):
+
+| Befund | alt | neu |
+|---|---|---|
+| A1 Median Störung | 60,7 min (54,6–68,1), n = 14.205 | 61,4 (55,6–69,1), n = 14.105 |
+| A1 Median Placebo P1 / P2 | 11,5 / 9,0 min | **43,6 / 37,0 min** (n = 37.890 / 39.251) |
+| A1 Differenz Störung − Placebo P1 | 49,2 (42,4–57,0) | **17,8 (11,9–24,4)** |
+| A1 Differenz Störung − Placebo P2 | 51,7 (45,2–59,6) | **24,4 (19,2–30,7)** |
+| A2 „ohne Wirkung“ Störung | 13,9 % | 13,9 % |
+| A2 „ohne Wirkung“ Placebo P1 / P2 | 47,3 / 48,8 % | **22,7 / 22,1 %** |
+| A3–A5 Cox, Schwere-HR je +5 min | 0,732 | 0,733 |
+| Vorbelastung-HR / West-HR | 0,449 / 0,594 | 0,441 / 0,592 |
+| Sa-HR / So+Feiertag-HR | 1,194 / 1,274 | 1,202 / 1,285 |
+
+A6 (Median Erholungszeit ab t0+15 min, Klassen < 3 / 3–5 / 5–10 / 10–20 / > 20 min):
+
+| | Störung alt | Störung neu | Placebo P1 alt | Placebo P1 neu |
+|---|---|---|---|---|
+| Median (min) | 15,2 / 23,4 / 58,8 / 121,1 / 236,7 | 15,2 / 23,4 / 59,1 / 121,6 / 236,7 | 2,0 / 19,0 / 48,0 / 90,7 / 244,6 | 10,8 / 20,2 / 50,5 / 93,4 / 236,2 |
+| n | 1.358 / 1.844 / 4.228 / 2.451 / 608 | 1.340 / 1.824 / 4.208 / 2.442 / 603 | 21.267 / 6.457 / 10.303 / 4.219 / 1.027 | 6.819 / 7.152 / 12.300 / 5.087 / 1.221 |
+
+**Was das ändert:** (1) A1 und A2 bleiben qualitativ bestehen (Störung → längere Erholung, seltener „ohne Wirkung“), aber **die Effektgröße war stark überschätzt**: Differenz Faktor 2–3 kleiner, Abstand bei „ohne Wirkung“ 9 statt 33 Prozentpunkte. Die Aussage „60 Minuten gegen etwa 9–12“ in der Zusammenfassung ist so nicht haltbar; richtig ist etwa 61 gegen 37–44 Minuten. (2) Die Störungswerte selbst und alle Cox-Befunde ändern sich praktisch nicht. (3) A6: Die Placebo-Klasse < 3 min bestand zu zwei Dritteln aus Ausfallzeiten (n 21.267 → 6.819, Median 2,0 → 10,8 min). Der alte Befund „Der Störungs-Aufschlag schrumpft mit wachsender Schwere“ stützte sich u. a. auf diese Klasse: neuer Aufschlag (Störung − Placebo) 4,4 / 3,2 / 8,6 / 28,2 / 0,5 min, also **nicht monoton schrumpfend**, sondern bei Schwere 10–20 am größten und bei > 20 praktisch null (KIs breit, bei > 20 min 85 % zensiert). Die Folgerung „kein Kipppunkt, flacher werdend“ (B7) und die Regression-zur-Mitte-Kontrolle sind damit neu zu bewerten, nicht neu gerechnet. (4) Die Placebo-Konstruktion bleibt fragil: Nur Zeilen zu entfernen (ohne Fensterfilter) lieferte eine Differenz von 8,0 (1,9–15,0), mit Fensterfilter 17,8.

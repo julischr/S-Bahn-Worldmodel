@@ -30,10 +30,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, PROJECT_ROOT
 from .stations import STOP_ID_TO_NAME
 
-EVENTS_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_GLOB = str(events_final_dir() / "*.parquet")
 OUT_DIR = PROJECT_ROOT / "outputs" / "var" / "plausibilitaet"
 PLOT_DIR = PROJECT_ROOT / "outputs" / "var" / "plots"
 

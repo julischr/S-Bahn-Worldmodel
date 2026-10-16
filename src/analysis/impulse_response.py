@@ -19,9 +19,10 @@ import duckdb
 import numpy as np
 import pandas as pd
 
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, OUTPUTS_DIR, PLOTS_DIR
 
-EVENTS_FINAL_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_FINAL_GLOB = str(events_final_dir() / "*.parquet")
 STATE_VECTOR_PATH = DATA_DIR / "03_state_vector" / "state_vector_5min.parquet"
 
 CODE = 34

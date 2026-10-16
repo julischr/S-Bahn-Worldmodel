@@ -1059,3 +1059,17 @@ einen neuen Ausschlag zu erzeugen, und die Zufallsteilung zeigt keine
 Gruppenunterschiede. Das erhöht das Vertrauen auch in die ursprüngliche
 Code-34-Terzilanalyse (Stufe-1-Nachdiagnose), die denselben Sortiermodus
 verwendet hatte, aber dort nicht gegen dieses Artefakt getestet worden war.
+
+## Korrektur Datenausfall (nachträglich; alter Text oben unverändert)
+
+Im Echtzeitfeed fehlen ganze Zeiträume (21 volle Tage, v. a. September 2025, dazu viele Teilblöcke); die Zeilen sehen wie „perfekte Pünktlichkeit“ aus (delay = 0, keine Ausfälle, keine Codes). Suche, Regeln und Gesamttabelle: `outputs/korrektur_ausfall/KORREKTUR_DATENAUSFALL.md`; Liste `data/ausfall_bloecke.csv`. Neu gerechnet mit bereinigten Daten (Kopie `../S-Bahn_bereinigt`, 1,5 Mio. von 19 Mio. Zeilen entfernt):
+
+| Kennzahl | alt | neu |
+|---|---|---|
+| BEG-Vergleich Pünktlichkeit (< 6 min), Ankunft, Gesamtnetz | 82,70 % (n = 9.282.673) | **81,17 %** (n = 8.525.180); Lücke zu 87,9 % **6,7 statt 5,2 pp** |
+| dasselbe, Abfahrt / nur Stammstrecke | 83,92 % / 76,21 % | 82,50 % / 74,25 % |
+| eigene Ausfallquote | 2,83 % | 3,07 % (BEG: 8,4 %) |
+| Stufe 1, Code 34: Sockel [−60,−15] min | 80,7 s | **63,6 s** (−21 %) |
+| Code 34: Spitze bei t0 / Wert bei +60 min | 151,8 / 49,5 s | 136,1 / 33,8 s |
+
+Folgen: Die Pünktlichkeitsquote war überschätzt, die BEG-Lücke größer als berichtet. Der Sockel vor t0 war teilweise ein Datenausfall-Artefakt (Kontrollfenster in Ausfallzeiten hatten Verspätung 0); er sinkt um ein Fünftel, ist aber nicht verschwunden (neues Konfidenzband des Sockels 40–88 s). Die Impulsform (Spitze bei t0, Abklingen) bleibt. Nur die Hauptkurve wurde neu gerechnet; Nachdiagnosen (Terzile, Dauerklassen, neue Codes) nicht.

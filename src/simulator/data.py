@@ -16,9 +16,10 @@ import pandas as pd
 
 from src.analysis.var.run_all import EXCLUDED_DATES
 from src.analysis.var.stations import STATION_ORDER_WEST_OST, STOP_ID_TO_NAME
+from src.utils.ausfall_bloecke import events_final_dir
 from src.utils.constants import DATA_DIR, PROJECT_ROOT
 
-EVENTS_GLOB = str(DATA_DIR / "02_events" / "final" / "*.parquet")
+EVENTS_GLOB = str(events_final_dir() / "*.parquet")
 OUT = PROJECT_ROOT / "outputs" / "simulator"
 ZW = OUT / "zwischen"
 TZ = "Europe/Berlin"

@@ -216,3 +216,8 @@ Alle Plots in `outputs/simulator/plots/`.
 - Verallgemeinerung der Szenarien: 4 Simulationen je Variante, Rauschpegel ≈ Effekt bei +5 min.
 - Die experimentelle Sperrung ist nur an 6 Fällen getestet und wird dort stark verfehlt.
 - Wie sich die Ergebnisse mit anderem Trainingszeitraum (bis September) oder ohne Ausfallzähler verhalten.
+
+
+## Korrektur Datenausfall (nachträglich; alter Text oben unverändert)
+
+Im Echtzeitfeed fehlen 21 volle Tage (v. a. September 2025) und viele Teilblöcke (Zeilen mit delay = 0, keine Ausfälle, keine Codes; Details `outputs/korrektur_ausfall/KORREKTUR_DATENAUSFALL.md`). Folgen für Stufe 4: (1) Der **Kalibrierungsmonat September war überwiegend Datenausfall** (Ausfallrate 0,038 % statt ca. 0,2 %): die Temperaturskalierung (T = 0,906) wurde auf zum Teil leeren Daten gefittet; das erklärt, warum sie auf dem Test schlechter war. Die Begründung „untypischer Monat“ ist damit unvollständig. Der Simulator nutzt Rohwahrscheinlichkeiten (weder davon noch von Aug/Jan–Jul stark betroffen). (2) Das Training (Jan–Jul) enthält Ausfallzeilen (2025-01-11/12/13, 01-30, 03-19/20, 04-09 u. a., ca. 2 % der Zeilen (alle Stationen)); der Testzeitraum Okt–Dez ca. 1,2 % (v. a. 2025-10-03 und Teilblöcke). Die Prüfsteintage wurden nicht auf Ausfallblöcke geprüft. (3) Der Vorgängerbefund „ruhigste Stunden“ (`ruhige_zeitraeume.csv`) wurde bereits ohne Ausfallblöcke gesucht. **Nicht neu gerechnet:** Training, Ein-Schritt-Prüfung und Prüfsteine mit bereinigten Daten; mit `S_BAHN_AUSFALL_FILTER=1` ist das möglich (Simulator liest dann ebenfalls `final_bereinigt`). Bis dahin sind die Zahlen dieses Berichts als nicht bereinigt zu lesen.
